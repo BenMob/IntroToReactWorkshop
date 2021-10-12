@@ -1,0 +1,43 @@
+
+  /* Runs when an operation number is clicked */
+  const onOperationButtonClick = (operation) => {
+    if (screen !== "0") {
+      expression.push(screen);
+      expression.push(operation);
+      setScreen(screen + " " + operation + " ");
+      setCurrentNumber("");
+    }
+  };
+
+  /* Runs when the equal button is clicked */
+  const onEqualButtonClick = () => {
+    if (expression.length >= 2) {
+      expression.push(currentNumber);
+      setCurrentNumber("");
+      let x = expression[0];
+      let sign = expression[1];
+      let y = expression[2];
+      setScreen(calculate(x, sign, y));
+      setExpression([]);
+    }
+  };
+
+  /* Runs when the clear button is clicked */
+  const onClearButtonClick = () => {
+    setCurrentNumber("");
+    setScreen("0");
+    setExpression([]);
+  };
+
+  /* Computes the calculation */
+  const calculate = (operand1, operator, operand2) => {
+    console.log(operand1 + " " + operator + " " + operand2);
+    switch (operator) {
+      case "+":
+        return parseInt(operand1, 10) + parseInt(operand2, 10);
+      case "-":
+        return parseInt(operand1, 10) - parseInt(operand2, 10);
+      default:
+        return "Unsupported operand!";
+    }
+  }
